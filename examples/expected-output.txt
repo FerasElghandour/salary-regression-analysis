@@ -1,0 +1,25 @@
+{
+  "train_rows": 96,
+  "test_rows": 24,
+  "selected_predictors": [
+    "const",
+    "experience"
+  ],
+  "holdout_mae": 863.8451613776101,
+  "holdout_rmse": 1016.3143540073916,
+  "holdout_r2": 0.9979452186964739,
+  "coefficients": {
+    "const": 30147.380029479904,
+    "experience": 3994.68136462966
+  },
+  "hc3_intervals": {
+    "const": [
+      29689.71169791474,
+      30605.04836104507
+    ],
+    "experience": [
+      3956.1754700883175,
+      4033.1872591710026
+    ]
+  }
+}

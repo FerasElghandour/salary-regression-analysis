@@ -1,18 +1,53 @@
 # Salary Regression and Model Diagnostics
 
-**Feras Elghandour** · Technical case study
-
 Explain the association between salary, experience, education, and job-title indicators while checking whether regression assumptions support the interpretation.
 
 ## Implementation
 
 A portable OLS analysis that splits before feature selection and reports HC3 intervals and held-out errors.
 
-```mermaid
-flowchart LR
-    A[Validated inputs] --> B[Portable implementation]
-    B --> C[Evaluation and contract checks]
-    C --> D[Inspectable results]
+![Implementation mechanism: Complete salary records → Seeded train and test split → Encode predictors and remove aliases on train → Select predictors then fit HC3 OLS → Held-out errors and prediction intervals](assets/mechanism.svg)
+
+## Try a small example
+
+A small offline fixture exercises the public implementation. It demonstrates the behavior shown below; it does not replace the historical dataset, benchmark or production validation.
+
+After the local setup below, run from the repository root:
+
+```sh
+python examples/quickstart.py
+```
+
+The [example source](examples/quickstart.py), [captured output](examples/expected-output.txt) and [execution record](examples/environment.json) keep this demonstration inspectable. Floating-point values may vary with library versions.
+
+Observed output from this run:
+
+```text
+{
+  "train_rows": 96,
+  "test_rows": 24,
+  "selected_predictors": [
+    "const",
+    "experience"
+  ],
+  "holdout_mae": 863.8451613776101,
+  "holdout_rmse": 1016.3143540073916,
+  "holdout_r2": 0.9979452186964739,
+  "coefficients": {
+    "const": 30147.380029479904,
+    "experience": 3994.68136462966
+  },
+  "hc3_intervals": {
+    "const": [
+      29689.71169791474,
+      30605.04836104507
+    ],
+    "experience": [
+      3956.1754700883175,
+      4033.1872591710026
+    ]
+  }
+}
 ```
 
 ## Completed study
@@ -38,5 +73,3 @@ Prepare your own inputs as described in [DATA.md](DATA.md). Tests use generated 
 ## Practical relevance and limitations
 
 In the historical study, feature selection precedes the exploratory split, so its holdout is not an unbiased estimate of an isolated selection procedure. The current core fixes the order by selecting within the training partition. Observational associations, including the gender coefficient, are not causal effects or a justification for compensation decisions.
-
-This edition makes the core behavior reusable and inspectable. Historical metrics and synthetic contract tests provide different kinds of evidence; neither establishes client deployment or commercial impact.
