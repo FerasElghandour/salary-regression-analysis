@@ -37,6 +37,6 @@ Prepare your own inputs as described in [DATA.md](DATA.md). Tests use generated 
 
 ## Practical relevance and limitations
 
-Feature selection precedes the exploratory split, so the holdout is not an unbiased estimate of a fully isolated model-selection procedure. Observational associations, including the gender coefficient, are not causal effects or a justification for compensation decisions.
+In the historical study, feature selection precedes the exploratory split, so its holdout is not an unbiased estimate of an isolated selection procedure. The current core fixes the order by selecting within the training partition. Observational associations, including the gender coefficient, are not causal effects or a justification for compensation decisions.
 
 This edition makes the core behavior reusable and inspectable. Historical metrics and synthetic contract tests provide different kinds of evidence; neither establishes client deployment or commercial impact.
