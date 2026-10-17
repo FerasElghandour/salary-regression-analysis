@@ -8,6 +8,15 @@ A portable OLS analysis that splits before feature selection and reports HC3 int
 
 ![Implementation mechanism: Complete salary records → Seeded train and test split → Encode predictors and remove aliases on train → Select predictors then fit HC3 OLS → Held-out errors and prediction intervals](assets/mechanism.svg)
 
+
+
+## Fit and reuse the regression
+
+The training path exports selected predictors, fitted coefficients, robust intervals, source hash and held-out metrics. A separate point-prediction command reuses the frozen design.
+
+[Commands, artifacts and benchmark scope](BENCHMARKS.md) · [Versioned profiles](reproduction.json)
+
+
 ## Try a small example
 
 A small offline fixture exercises the public implementation. It demonstrates the behavior shown below; it does not replace the historical dataset, benchmark or production validation.
